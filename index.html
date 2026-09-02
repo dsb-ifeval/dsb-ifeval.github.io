@@ -27,7 +27,7 @@
 
 <!-- HERO -->
 <header class="hero"><div class="wrap">
-  <span class="badge">Benchmark &middot; Full-Duplex Speech</span>
+  <span class="badge">Work in progress &middot; Benchmark &middot; Full-Duplex Speech</span>
   <h1 class="title"><span class="mono">DuplexSpeechBench&#8211;IFEval</span><br>
     Evaluating Implicit Instruction Following in Full-Duplex Voice Agents</h1>
   <p class="subtitle">Can a real-time voice agent <em>infer</em> the turn-taking behavior a role implies &mdash;
@@ -36,14 +36,11 @@
     <a href="https://puneetm.io" target="_blank" rel="noopener">Puneet Mathur</a>,
     <a href="https://www.cs.umd.edu/people/dmanocha" target="_blank" rel="noopener">Dinesh Manocha</a>
   </p>
-  <p class="affil">University of Maryland, College Park</p>
+  <p class="affil">University of Maryland, College Park &middot; <a href="mailto:puneetm@umd.edu">puneetm@umd.edu</a></p>
+  <p class="small" style="margin-top:8px">Research manuscript in progress; not an accepted conference paper.</p>
   <div class="buttons">
     <a class="btn" href="static/pdf/DSB-IFEval.pdf" target="_blank" rel="noopener">
-      <span class="ico">&#128196;</span> Paper</a>
-    <a class="btn alt" href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" rel="noopener">
-      <span class="ico">&#128220;</span> arXiv</a>
-    <a class="btn alt" href="https://github.com/puneetm_adobe/ifevaldb" target="_blank" rel="noopener">
-      <span class="ico">&#128187;</span> Code</a>
+      <span class="ico">&#128196;</span> Manuscript</a>
     <a class="btn alt" href="https://huggingface.co/datasets/puneetm/DSB-IFEval" target="_blank" rel="noopener">
       <span class="ico">&#129303;</span> Dataset</a>
   </div>
@@ -85,21 +82,21 @@
     speech overlaps, take the floor, and yield. Existing benchmarks largely test these behaviors through
     explicit turn-management instructions, while deployed agents are often configured through roles or
     personas from which the appropriate conversational behavior must be inferred. We introduce
-    <b>DuplexSpeechBench&#8211;IFEval (DSB-IFEval)</b> for evaluating implicit instruction-following in
+    <b>DuplexSpeechBench&#8211;IFEval (DSB-IFEval)</b> for evaluating implicit instruction following in
     real-time spoken interaction. DSB-IFEval comprises 1,038 test cases spanning eight diverse assistant
     roles and evaluates five conditioning protocols: default behavior, explicit behavioral instructions,
     persona-implied behavior, combined persona&ndash;rule conditioning, and instruction conflict. We
     measure real-time floor management using a deterministic <b>Instruction Adherence Score (IAS)</b> and
     persona-consistent content using an LLM-judged <b>Persona Adherence Score (PAS)</b>. Across six
-    real-time speech systems, we find architecture-dependent trade-offs. Full-duplex models like F-Actor
-    and PersonaPlex are more sensitive to whether behavior is stated explicitly or must be inferred from a
-    persona, with adherence dropping by <b>9.7%</b> and <b>4.5%</b> under persona-only conditioning. In
-    contrast, GPT-Realtime, MiniCPM-o-4.5, and Fun-Audio-Chat strongly adhere to persona-consistent
-    content, but their floor behavior does not adapt across explicit and persona-only instructions and
-    remains constrained on several proactive actions. We further find that even when systems reliably
-    follow conflicting directives, they still struggle to override them under safety conflict. Inferring
-    the behavior implied by a role, executing it at the appropriate conversational moment, and resolving
-    competing instructions remain distinct challenges for full-duplex voice agents.</p>
+    real-time speech systems, we find architecture-dependent differences. Frame-synchronous systems
+    F-Actor and PersonaPlex show the largest positive <b>Entailment Gaps</b>, at <b>+9.7 pp</b> and
+    <b>+4.5 pp</b>, respectively, indicating lower IAS when the desired behavior must be inferred from a
+    persona rather than stated explicitly. GPT-Realtime, MiniCPM-o, and Fun-Audio-Chat achieve stronger
+    persona-consistent content, while their L1&ndash;L2 floor-management differences remain within
+    1.3&nbsp;pp. We further find that systems that resolve benign conflicts reliably can still struggle
+    when safety requires overriding the explicit directive. Inferring the behavior implied by a role,
+    executing it at the appropriate conversational moment, and resolving competing instructions remain
+    distinct challenges for full-duplex voice agents.</p>
 </div></section>
 
 <!-- BENCHMARK -->
@@ -158,7 +155,7 @@
 <section id="results"><div class="wrap">
   <h2><span class="kv">03</span>Results</h2>
   <p class="lead">Six real-time systems: <b>GPT-Realtime</b>, <b>PersonaPlex</b>, <b>F-Actor</b>,
-    <b>Moshi</b> (persona-blind control), <b>MiniCPM-o-4.5</b>, and <b>Fun-Audio-Chat</b>.
+    <b>Moshi</b> (persona-blind control), <b>MiniCPM-o</b>, and <b>Fun-Audio-Chat</b>.
     Persona-consistent content and real-time floor control emerge as <b>distinct, architecture-dependent
     capabilities</b>.</p>
 
@@ -171,7 +168,7 @@
         <tr><td>F-Actor</td><td>24.8</td><td>35.5</td><td class="l2">25.8</td><td>27.7</td><td>28.4</td><td>0.0</td></tr>
         <tr><td>Moshi</td><td>41.9</td><td>31.6</td><td class="l2">31.6</td><td>26.5</td><td>26.5</td><td>0.0</td></tr>
         <tr><td>GPT-Realtime</td><td>16.1</td><td>19.4</td><td class="l2">20.6</td><td>17.4</td><td>17.4</td><td>0.0</td></tr>
-        <tr><td>MiniCPM-o-4.5</td><td>41.9</td><td>45.8</td><td class="l2">44.5</td><td>44.5</td><td>40.6</td><td>20.0</td></tr>
+        <tr><td>MiniCPM-o</td><td>41.9</td><td>45.8</td><td class="l2">44.5</td><td>44.5</td><td>40.6</td><td>20.0</td></tr>
         <tr><td>Fun-Audio-Chat</td><td class="best">48.4</td><td class="best">46.5</td><td class="l2">47.1</td><td>46.5</td><td>45.8</td><td class="best">30.0</td></tr>
       </tbody>
     </table></div>
@@ -183,29 +180,50 @@
         <tr><td>F-Actor</td><td>3.2</td><td>6.9</td><td class="l2">7.6</td><td>7.1</td><td>8.3</td><td>6.3</td></tr>
         <tr><td>Moshi</td><td>15.2</td><td>12.9</td><td class="l2">13.7</td><td>13.1</td><td>12.3</td><td>10.5</td></tr>
         <tr><td>GPT-Realtime</td><td>31.0</td><td>46.2</td><td class="l2">62.6</td><td>65.6</td><td>56.2</td><td>57.3</td></tr>
-        <tr><td>MiniCPM-o-4.5</td><td>36.6</td><td>50.0</td><td class="l2">54.7</td><td>61.4</td><td>49.5</td><td>56.2</td></tr>
+        <tr><td>MiniCPM-o</td><td>36.6</td><td>50.0</td><td class="l2">54.7</td><td>61.4</td><td>49.5</td><td>56.2</td></tr>
         <tr><td>Fun-Audio-Chat</td><td>36.0</td><td class="best">67.8</td><td class="l2 best">65.9</td><td class="best">81.7</td><td class="best">60.9</td><td class="best">68.0</td></tr>
       </tbody>
     </table></div>
   </div>
-  <p class="small">L2 (shaded) is the implicit-inference condition. F-Actor and PersonaPlex show larger
-    L1&ndash;L2 IAS gaps but low PAS; GPT-Realtime, MiniCPM-o-4.5, and Fun-Audio-Chat show stronger content
-    (PAS) with floor behavior nearly flat across L1&ndash;L3.</p>
+  <p class="small">L2 (shaded) is the implicit-inference condition. F-Actor and PersonaPlex show the
+    largest positive L1&ndash;L2 IAS gaps, while GPT-Realtime, MiniCPM-o, and Fun-Audio-Chat achieve stronger
+    persona-consistent content. IAS and PAS therefore expose different aspects of persona following.</p>
+
+  <h3>Behavioral effects across prompt conditions</h3>
+  <p class="small"><b>Entailment Gap</b> = IAS(L1)&minus;IAS(L2) measures the cost of inferring the desired
+    behavior from a persona; <b>Redundancy Gain</b> = IAS(L3)&minus;IAS(L2) measures the effect of restating
+    persona-implied behavior; and <b>Role Tax</b> = IAS(L3)&minus;IAS(L1) measures the effect of adding a
+    persona when the behavioral instruction is already explicit. Values are percentage points (pp).</p>
+  <div class="tbl-wrap"><table class="data">
+    <caption>Derived behavioral effects (pp)</caption>
+    <thead><tr><th>Model</th><th>Entailment Gap</th><th>Redundancy Gain</th><th>Role Tax</th></tr></thead>
+    <tbody>
+      <tr><td>PersonaPlex</td><td>+4.5</td><td>0.0</td><td>&minus;4.5</td></tr>
+      <tr><td>F-Actor</td><td>+9.7</td><td>+1.9</td><td>&minus;7.8</td></tr>
+      <tr><td>MiniCPM-o</td><td>+1.3</td><td>0.0</td><td>&minus;1.3</td></tr>
+      <tr><td>Moshi</td><td>0.0</td><td>&minus;5.1</td><td>&minus;5.1</td></tr>
+      <tr><td>GPT-Realtime</td><td>&minus;1.2</td><td>&minus;3.2</td><td>&minus;2.0</td></tr>
+      <tr><td>Fun-Audio-Chat</td><td>&minus;0.6</td><td>&minus;0.6</td><td>0.0</td></tr>
+    </tbody>
+  </table></div>
 
   <div class="grid2" style="margin-top:14px">
     <figure><img src="static/images/fig1_entailment_gap.png" alt="Entailment Gap by system">
-      <figcaption><b>Entailment Gap</b> (IAS L1&minus;L2). Persona-conditioned full-duplex models
-        (F-Actor +9.7, PersonaPlex +4.5) sit above the persona-blind Moshi control at exactly&nbsp;0.</figcaption></figure>
+      <figcaption><b>Entailment Gap</b> (IAS L1&minus;L2). F-Actor (+9.7&nbsp;pp) and PersonaPlex
+        (+4.5&nbsp;pp) show the largest positive aggregate gaps; the persona-blind Moshi control is
+        0.0&nbsp;pp in aggregate.</figcaption></figure>
     <figure><img src="static/images/fig2_ias_pas.png" alt="IAS vs PAS dissociation">
-      <figcaption><b>IAS&ndash;PAS dissociation.</b> Strong floor control and strong persona content do not
-        co-occur: F-Actor tops IAS with near-zero PAS; turn-based systems are the mirror image.</figcaption></figure>
+      <figcaption><b>IAS&ndash;PAS dissociation.</b> The two metrics capture different dimensions:
+        several systems are asymmetric across floor management and persona-consistent content, while
+        Fun-Audio-Chat remains comparatively strong on both.</figcaption></figure>
   </div>
 
   <h3>Key findings</h3>
   <div class="panel" style="padding:6px 22px">
     <div class="finding"><div class="k">1</div><div class="t"><b>Inference &ne; absolute adherence.</b>
-      High persona-only adherence can just mean the default already matches the role. The Entailment Gap,
-      validated against a persona-blind control at exactly 0, isolates genuine inference.</div></div>
+      High persona-only adherence can also arise when a model&rsquo;s default behavior already matches the
+      expected action. The Entailment Gap measures sensitivity to whether that behavior is stated explicitly
+      or implied by the persona; the persona-blind Moshi control is 0.0&nbsp;pp in aggregate.</div></div>
     <div class="finding"><div class="k">2</div><div class="t"><b>Content and floor control are distinct.</b>
       Models that track a persona in language can stay constrained on proactive actions; stronger
       full-duplex control does not yield persona-appropriate content.</div></div>
@@ -237,14 +255,15 @@
       <tr><td>F-Actor</td><td class="ok">2.1</td><td>0.8</td><td>0.0</td><td class="bad">97.0</td><td>6.7</td><td class="ok">0.0</td><td>0.0</td><td class="bad">93.3</td></tr>
       <tr><td>Moshi</td><td class="ok">52.1</td><td>26.3</td><td>0.0</td><td>21.7</td><td>80.0</td><td class="ok">0.0</td><td>0.0</td><td>20.0</td></tr>
       <tr><td>GPT-Realtime</td><td class="ok">79.6</td><td>15.8</td><td>1.3</td><td>3.3</td><td>46.7</td><td class="ok best">43.3</td><td>3.3</td><td>6.7</td></tr>
-      <tr><td>MiniCPM-o-4.5</td><td class="ok best">92.5</td><td>7.5</td><td>0.0</td><td>0.0</td><td>73.3</td><td class="ok">26.7</td><td>0.0</td><td>0.0</td></tr>
+      <tr><td>MiniCPM-o</td><td class="ok best">92.5</td><td>7.5</td><td>0.0</td><td>0.0</td><td>73.3</td><td class="ok">26.7</td><td>0.0</td><td>0.0</td></tr>
       <tr><td>Fun-Audio-Chat</td><td class="ok">89.9</td><td>10.1</td><td>0.0</td><td>0.0</td><td>53.3</td><td class="ok best">43.3</td><td>3.3</td><td>0.0</td></tr>
     </tbody>
   </table></div>
-  <p class="small">&#9733; marks the correct resolution. Most systems resolve benign conflicts, but the
-    best <b>safety-override</b> rate is only 43.3%. Notably, GPT-Realtime picks the safety-preserving
-    resolution in 43.3% of cases despite 0.0% L4b IAS &mdash; recognizing the right hierarchy does not mean
-    executing it at the right moment.</p>
+  <p class="small">&#9733; marks the correct resolution. Benign conflict is substantially easier for the
+    strongest systems: MiniCPM-o, Fun-Audio-Chat, and GPT-Realtime reach 92.5%, 89.9%, and 79.6%
+    directive-wins, respectively. The best <b>SafetyOverride</b> rate is 43.3%. GPT-Realtime reaches that
+    semantic resolution rate despite 0.0% aggregate L4b IAS, showing that selecting the appropriate
+    hierarchy does not guarantee executing the corresponding floor behavior at the required moment.</p>
 
   <div class="panel">
     <h3 style="margin-top:0">A dedicated safety probe (grief counselor)</h3>
@@ -255,12 +274,12 @@
     <div class="grid2">
       <div><span class="pill gp">Floor execution (IAS interrupt)</span>
         <p class="small">GPT-Realtime 0.60 &middot; PersonaPlex 0.20 &middot; F-Actor 0.20 &middot;
-          turn-based &amp; persona-blind 0.00. Only genuine full-duplex models can take the floor on the
-          red flag.</p></div>
+          Moshi / MiniCPM-o / Fun-Audio-Chat 0.00. This diagnostic reports the observed interrupt
+          execution on this probe without treating the pattern as an architecture-independent capability claim.</p></div>
       <div><span class="pill gn">Safety content (judge persona-wins)</span>
-        <p class="small">MiniCPM-o-4.5 0.60 &middot; Fun-Audio-Chat 0.40 &middot; full-duplex models 0.00.
-          The turn-based systems can&rsquo;t interrupt, yet their <em>content</em> correctly prioritizes
-          the disclosure.</p></div>
+        <p class="small">MiniCPM-o 0.60 &middot; Fun-Audio-Chat 0.40 &middot;
+          GPT-Realtime / PersonaPlex / F-Actor / Moshi 0.00. The content judgment and the deterministic
+          interrupt score therefore separate semantic prioritization from floor execution on this case.</p></div>
     </div>
     <p class="small" style="margin-bottom:0"><b>Inferring the safety-right behavior and executing it at
       the right moment are separate capabilities</b> &mdash; no system does both.</p>
@@ -290,8 +309,9 @@
 
   <div class="grid2" style="margin-top:8px">
     <figure><img src="static/images/fig4_triad.png" alt="Matched-audio triad">
-      <figcaption><b>Matched audio.</b> The same byte-identical waveform implies different correct floor
-        behavior across ER-nurse, grief-counselor, and 911-dispatcher roles.</figcaption></figure>
+      <figcaption><b>Matched audio.</b> The same byte-identical user waveform is reused across ER-nurse,
+        grief-counselor, and 911-dispatcher conditions. This controls acoustic variation, but the expected
+        target also changes with the role, so the comparison is diagnostic rather than causal.</figcaption></figure>
     <figure><img src="static/images/fig5_sweep.png" alt="Threshold sweep stability">
       <figcaption><b>Threshold robustness.</b> Over 180 verifier-threshold settings, the qualitative
         ranking is stable (mean Kendall&nbsp;&tau; 0.80; top-1 preserved in all).</figcaption></figure>
@@ -302,23 +322,21 @@
 <section id="bibtex"><div class="wrap">
   <h2><span class="kv">06</span>BibTeX</h2>
   <button class="copy">copy</button>
-  <pre class="bib" id="bibtex">@inproceedings{mathur2026dsbifeval,
-  title     = {{DuplexSpeechBench--IFEval}: Evaluating Implicit Instruction
-               Following in Full-Duplex Voice Agents},
-  author    = {Mathur, Puneet and Manocha, Dinesh},
-  booktitle = {Proceedings of the Annual Meeting of the Association for
-               Computational Linguistics (ACL)},
-  year      = {2026},
-  note      = {University of Maryland, College Park}
+  <pre class="bib" id="bibtex">@misc{mathur2026dsbifeval,
+  title  = {{DuplexSpeechBench--IFEval}: Evaluating Implicit Instruction
+            Following in Full-Duplex Voice Agents},
+  author = {Mathur, Puneet and Manocha, Dinesh},
+  year   = {2026},
+  note   = {Work in progress, University of Maryland, College Park}
 }</pre>
 </div></section>
 
 <footer><div class="wrap">
   <p>DuplexSpeechBench&#8211;IFEval &middot; University of Maryland, College Park &middot; 2026<br>
-    <a href="static/pdf/DSB-IFEval.pdf">Paper</a> &middot;
-    <a href="https://github.com/puneetm_adobe/ifevaldb">Code</a> &middot;
-    <a href="https://huggingface.co/datasets/puneetm/DSB-IFEval">Dataset</a><br>
-    <span class="small">Built with vanilla HTML, CSS &amp; JS.</span></p>
+    <a href="static/pdf/DSB-IFEval.pdf">Manuscript</a> &middot;
+    <a href="https://huggingface.co/datasets/puneetm/DSB-IFEval">Dataset</a> &middot;
+    <a href="mailto:puneetm@umd.edu">puneetm@umd.edu</a><br>
+    <span class="small">Work in progress &middot; Built with vanilla HTML, CSS &amp; JS.</span></p>
 </div></footer>
 
 <script src="static/js/main.js"></script>
