@@ -152,7 +152,7 @@
         <tr><td>F-Actor</td><td>24.8</td><td>35.5</td><td class="l2">25.8</td><td>27.7</td><td>28.4</td><td>0.0</td></tr>
         <tr><td>Moshi</td><td>41.9</td><td>31.6</td><td class="l2">31.6</td><td>26.5</td><td>26.5</td><td>0.0</td></tr>
         <tr><td>GPT-Realtime</td><td>16.1</td><td>19.4</td><td class="l2">20.6</td><td>17.4</td><td>17.4</td><td>0.0</td></tr>
-        <tr><td>MiniCPM-o</td><td>41.9</td><td>45.8</td><td class="l2">44.5</td><td>44.5</td><td>40.6</td><td>20.0</td></tr>
+        <tr><td>MiniCPM-o</td><td>41.9</td><td>45.8</td><td class="l2">43.2</td><td>45.2</td><td>45.2</td><td class="best">30.0</td></tr>
         <tr><td>Fun-Audio-Chat</td><td class="best">48.4</td><td class="best">46.5</td><td class="l2" class="best">47.1</td><td class="best">46.5</td><td class="best">45.8</td><td class="best">30.0</td></tr>
       </tbody>
     </table></div>
@@ -161,11 +161,11 @@
       <thead><tr><th>Model</th><th>L0</th><th>L1</th><th class="l2">L2</th><th>L3</th><th>L4a</th><th>L4b</th></tr></thead>
       <tbody>
         <tr><td>PersonaPlex</td><td>16.5</td><td>18.0</td><td class="l2">22.9</td><td>23.4</td><td>18.8</td><td>24.2</td></tr>
-        <tr><td>F-Actor</td><td>3.2</td><td>6.9</td><td class="l2">7.6</td><td>7.1</td><td>8.3</td><td>6.3</td></tr>
-        <tr><td>Moshi</td><td>15.2</td><td>12.9</td><td class="l2">13.7</td><td>13.1</td><td>12.3</td><td>10.5</td></tr>
-        <tr><td>GPT-Realtime</td><td>31.0</td><td>46.2</td><td class="l2">62.6</td><td>65.6</td><td>56.2</td><td>57.3</td></tr>
-        <tr><td>MiniCPM-o</td><td class="best">36.6</td><td>50.0</td><td class="l2">54.7</td><td>61.4</td><td>49.5</td><td>56.2</td></tr>
-        <tr><td>Fun-Audio-Chat</td><td>36.0</td><td class="best">67.8</td><td class="l2 best">65.9</td><td class="best">81.7</td><td class="best">60.9</td><td class="best">68.0</td></tr>
+        <tr><td>F-Actor</td><td>3.2</td><td>6.9</td><td class="l2">7.6</td><td>7.1</td><td>8.3</td><td>6.0</td></tr>
+        <tr><td>Moshi</td><td>15.2</td><td>12.9</td><td class="l2">13.7</td><td>13.1</td><td>12.3</td><td>11.0</td></tr>
+        <tr><td>GPT-Realtime</td><td>31.0</td><td>46.2</td><td class="l2">62.6</td><td>65.6</td><td>56.2</td><td>55.3</td></tr>
+        <tr><td>MiniCPM-o</td><td class="best">46.2</td><td>58.5</td><td class="l2 best">66.2</td><td>71.1</td><td class="best">61.2</td><td class="best">75.0</td></tr>
+        <tr><td>Fun-Audio-Chat</td><td>36.0</td><td class="best">67.8</td><td class="l2">65.9</td><td class="best">81.7</td><td>60.9</td><td>67.3</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -184,7 +184,7 @@
     <tbody>
       <tr><td>PersonaPlex</td><td>+4.5</td><td>0.0</td><td>&minus;4.5</td></tr>
       <tr><td>F-Actor</td><td>+9.7</td><td>+1.9</td><td>&minus;7.8</td></tr>
-      <tr><td>MiniCPM-o</td><td>+1.3</td><td>0.0</td><td>&minus;1.3</td></tr>
+      <tr><td>MiniCPM-o</td><td>+2.6</td><td>+2.0</td><td>&minus;0.6</td></tr>
       <tr><td>Moshi</td><td>0.0</td><td>&minus;5.1</td><td>&minus;5.1</td></tr>
       <tr><td>GPT-Realtime</td><td>&minus;1.2</td><td>&minus;3.2</td><td>&minus;2.0</td></tr>
       <tr><td>Fun-Audio-Chat</td><td>&minus;0.6</td><td>&minus;0.6</td><td>0.0</td></tr>
@@ -212,10 +212,10 @@
       Models that track a persona in language can stay constrained on proactive actions; stronger
       full-duplex control does not yield persona-appropriate content.</div></div>
     <div class="finding"><div class="k">3</div><div class="t"><b>Restating the rule does not close the gap.</b>
-      Redundancy Gain (L3&minus;L2) is at most +1.9&nbsp;pp; Role Tax (L3&minus;L1) is never positive.</div></div>
+      Redundancy Gain (L3&minus;L2) is at most +2.0&nbsp;pp; Role Tax (L3&minus;L1) is never positive.</div></div>
     <div class="finding"><div class="k">4</div><div class="t"><b>Following directives &ne; safety hierarchy.</b>
-      Systems that resolve benign conflicts (up to 92.5%) fail to override a directive when safety requires
-      it &mdash; the best safety-override rate is only 43.3%.</div></div>
+      Systems that resolve benign conflicts (up to 89.9%) often fail to override a directive when safety requires
+      it &mdash; only MiniCPM-o-4.5 exceeds 50% (60.0% SafetyOverride); all others stay at or below 43.3%.</div></div>
   </div>
 </div></section>
 
@@ -238,15 +238,15 @@
       <tr><td>PersonaPlex</td><td class="ok">53.3</td><td>18.8</td><td>0.0</td><td>27.9</td><td>66.7</td><td class="ok">6.7</td><td>0.0</td><td>26.7</td></tr>
       <tr><td>F-Actor</td><td class="ok">2.1</td><td>0.8</td><td>0.0</td><td class="bad">97.0</td><td>6.7</td><td class="ok">0.0</td><td>0.0</td><td class="bad">93.3</td></tr>
       <tr><td>Moshi</td><td class="ok">52.1</td><td>26.3</td><td>0.0</td><td>21.7</td><td>80.0</td><td class="ok">0.0</td><td>0.0</td><td>20.0</td></tr>
-      <tr><td>GPT-Realtime</td><td class="ok">79.6</td><td>15.8</td><td>1.3</td><td>3.3</td><td>46.7</td><td class="ok best">43.3</td><td>3.3</td><td>6.7</td></tr>
-      <tr><td>MiniCPM-o</td><td class="ok best">92.5</td><td>7.5</td><td>0.0</td><td>0.0</td><td>73.3</td><td class="ok">26.7</td><td>0.0</td><td>0.0</td></tr>
-      <tr><td>Fun-Audio-Chat</td><td class="ok">89.9</td><td>10.1</td><td>0.0</td><td>0.0</td><td>53.3</td><td class="ok best">43.3</td><td>3.3</td><td>0.0</td></tr>
+      <tr><td>GPT-Realtime</td><td class="ok">79.6</td><td>15.8</td><td>1.3</td><td>3.3</td><td>50.0</td><td class="ok">33.3</td><td>10.0</td><td>6.7</td></tr>
+      <tr><td>MiniCPM-o</td><td class="ok">88.8</td><td>10.8</td><td>0.0</td><td>0.4</td><td>36.7</td><td class="ok best">60.0</td><td>3.3</td><td>0.0</td></tr>
+      <tr><td>Fun-Audio-Chat</td><td class="ok best">89.9</td><td>10.1</td><td>0.0</td><td>0.0</td><td>56.7</td><td class="ok">43.3</td><td>0.0</td><td>0.0</td></tr>
     </tbody>
   </table></div>
   <p class="small">&#9733; marks the correct resolution. Benign conflict is substantially easier for the
-    strongest systems: MiniCPM-o, Fun-Audio-Chat, and GPT-Realtime reach 92.5%, 89.9%, and 79.6%
-    directive-wins, respectively. The best <b>SafetyOverride</b> rate is 43.3%. GPT-Realtime reaches that
-    semantic resolution rate despite 0.0% aggregate L4b IAS, showing that selecting the appropriate
+    strongest systems: Fun-Audio-Chat, MiniCPM-o, and GPT-Realtime reach 89.9%, 88.8%, and 79.6%
+    directive-wins, respectively. Under safety conflict, <b>MiniCPM-o-4.5</b> reaches the best <b>SafetyOverride</b> at 60.0% &mdash; the only system above 50%. GPT-Realtime selects that
+    resolution 33.3% of the time despite 0.0% aggregate L4b IAS, showing that selecting the appropriate
     hierarchy does not guarantee executing the corresponding floor behavior at the required moment.</p>
 
   <div class="panel">
