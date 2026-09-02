@@ -33,13 +33,12 @@
   <p class="subtitle">Can a real-time voice agent <em>infer</em> the turn-taking behavior a role implies &mdash;
     and execute it at the right moment on the conversational floor?</p>
   <p class="authors">
-    <a href="https://puneetm.io" target="_blank" rel="noopener">Puneet Mathur</a>,
+    <a href="puneetm@umd.edu" target="_blank" rel="noopener">Puneet Mathur</a>,
     <a href="https://www.cs.umd.edu/people/dmanocha" target="_blank" rel="noopener">Dinesh Manocha</a>
   </p>
-  <p class="affil">University of Maryland, College Park &middot; <a href="mailto:puneetm@umd.edu">puneetm@umd.edu</a></p>
-  <p class="small" style="margin-top:8px">Research manuscript in progress; not an accepted conference paper.</p>
+  <p class="affil">University of Maryland, College Park &middot;</p>
   <div class="buttons">
-    <a class="btn" href="static/pdf/DSB-IFEval.pdf" target="_blank" rel="noopener">
+    <a class="btn" href="" target="_blank" rel="noopener">
       <span class="ico">&#128196;</span> Manuscript</a>
     <a class="btn alt" href="https://huggingface.co/datasets/puneetm/DSB-IFEval" target="_blank" rel="noopener">
       <span class="ico">&#129303;</span> Dataset</a>
@@ -78,25 +77,7 @@
 <!-- ABSTRACT -->
 <section id="abstract"><div class="wrap">
   <h2><span class="kv">01</span>Abstract</h2>
-  <p>Full-duplex voice agents must continuously decide when to listen, backchannel, interrupt, handle
-    speech overlaps, take the floor, and yield. Existing benchmarks largely test these behaviors through
-    explicit turn-management instructions, while deployed agents are often configured through roles or
-    personas from which the appropriate conversational behavior must be inferred. We introduce
-    <b>DuplexSpeechBench&#8211;IFEval (DSB-IFEval)</b> for evaluating implicit instruction following in
-    real-time spoken interaction. DSB-IFEval comprises 1,038 test cases spanning eight diverse assistant
-    roles and evaluates five conditioning protocols: default behavior, explicit behavioral instructions,
-    persona-implied behavior, combined persona&ndash;rule conditioning, and instruction conflict. We
-    measure real-time floor management using a deterministic <b>Instruction Adherence Score (IAS)</b> and
-    persona-consistent content using an LLM-judged <b>Persona Adherence Score (PAS)</b>. Across six
-    real-time speech systems, we find architecture-dependent differences. Frame-synchronous systems
-    F-Actor and PersonaPlex show the largest positive <b>Entailment Gaps</b>, at <b>+9.7 pp</b> and
-    <b>+4.5 pp</b>, respectively, indicating lower IAS when the desired behavior must be inferred from a
-    persona rather than stated explicitly. GPT-Realtime, MiniCPM-o, and Fun-Audio-Chat achieve stronger
-    persona-consistent content, while their L1&ndash;L2 floor-management differences remain within
-    1.3&nbsp;pp. We further find that systems that resolve benign conflicts reliably can still struggle
-    when safety requires overriding the explicit directive. Inferring the behavior implied by a role,
-    executing it at the appropriate conversational moment, and resolving competing instructions remain
-    distinct challenges for full-duplex voice agents.</p>
+  <p>Full-duplex voice agents must continuously decide when to listen, backchannel, interrupt, handle speech overlaps, take the floor, and yield. Existing benchmarks largely test these behaviors through explicit turn-management instructions, while deployed agents are often configured through roles or personas from which the appropriate conversational behavior must be inferred. We introduce <b>DuplexSpeechBench-IFEval</b> for evaluating implicit instruction-following in real-time spoken interaction. \shortbench{} comprises 1,038 test cases spanning eight diverse assistant roles and evaluates five conditioning protocols for instruction-following: default behavior, explicit behavioral instructions, persona-implied behavior, combined persona--rule conditioning, and instruction conflict. We measure real-time floor management using a deterministic Instruction Adherence Score (IAS) and persona-consistent content using LLM-judged Persona Adherence Score (PAS). Across six real-time speech systems, we find architecture-dependent trade-offs. Full duplex models like F-Actor and PersonaPlex are more sensitive to whether conversational behavior is stated explicitly or must be inferred from a persona, with adherence dropping by 9.7% and 4.5%, respectively, under persona-only conditioning. In contrast, GPT-Realtime, MiniCPM-o, and Fun-Audio-Chat strongly adhere to persona-consistent content, but their floor behavior does not adapt across explicit and persona-only instructions and remains constrained on several proactive actions. We further find that even if systems reliably follow conflicting directives to their prescribed persona, they still struggle to override them under safety conflict. These results show that inferring the behavior implied by a role, executing it at the appropriate conversational moment, and resolving competing instructions remain distinct challenges for full-duplex voice agents.</p>
 </div></section>
 
 <!-- BENCHMARK -->
@@ -169,7 +150,7 @@
         <tr><td>Moshi</td><td>41.9</td><td>31.6</td><td class="l2">31.6</td><td>26.5</td><td>26.5</td><td>0.0</td></tr>
         <tr><td>GPT-Realtime</td><td>16.1</td><td>19.4</td><td class="l2">20.6</td><td>17.4</td><td>17.4</td><td>0.0</td></tr>
         <tr><td>MiniCPM-o</td><td>41.9</td><td>45.8</td><td class="l2">44.5</td><td>44.5</td><td>40.6</td><td>20.0</td></tr>
-        <tr><td>Fun-Audio-Chat</td><td class="best">48.4</td><td class="best">46.5</td><td class="l2">47.1</td><td>46.5</td><td>45.8</td><td class="best">30.0</td></tr>
+        <tr><td>Fun-Audio-Chat</td><td class="best">48.4</td><td class="best">46.5</td><td class="l2" class="best">47.1</td><td class="best">46.5</td><td class="best">45.8</td><td class="best">30.0</td></tr>
       </tbody>
     </table></div>
     <div class="tbl-wrap"><table class="data">
@@ -180,7 +161,7 @@
         <tr><td>F-Actor</td><td>3.2</td><td>6.9</td><td class="l2">7.6</td><td>7.1</td><td>8.3</td><td>6.3</td></tr>
         <tr><td>Moshi</td><td>15.2</td><td>12.9</td><td class="l2">13.7</td><td>13.1</td><td>12.3</td><td>10.5</td></tr>
         <tr><td>GPT-Realtime</td><td>31.0</td><td>46.2</td><td class="l2">62.6</td><td>65.6</td><td>56.2</td><td>57.3</td></tr>
-        <tr><td>MiniCPM-o</td><td>36.6</td><td>50.0</td><td class="l2">54.7</td><td>61.4</td><td>49.5</td><td>56.2</td></tr>
+        <tr><td>MiniCPM-o</td><td class="best">36.6</td><td>50.0</td><td class="l2">54.7</td><td>61.4</td><td>49.5</td><td>56.2</td></tr>
         <tr><td>Fun-Audio-Chat</td><td>36.0</td><td class="best">67.8</td><td class="l2 best">65.9</td><td class="best">81.7</td><td class="best">60.9</td><td class="best">68.0</td></tr>
       </tbody>
     </table></div>
